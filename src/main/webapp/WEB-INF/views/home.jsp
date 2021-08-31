@@ -5,13 +5,21 @@
 
 <html>
 <head>
-	<title>Home</title>
+	<title>home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<h1>시험 선택</h1>
+<form action="test" method="post">
+	<div>
+		<select id="sel" name="subjectName">
+			<option value="bread">빵</option>
+			<option value="snack">과자</option>
+			<option value="icecream">아이스크림</option>
+			<option value="fruit">과일</option>
+		</select>
+	</div>
+	<input type="submit" value="선택">
+	<input type="reset" value="취소">
+</form>
 </body>
 </html>
