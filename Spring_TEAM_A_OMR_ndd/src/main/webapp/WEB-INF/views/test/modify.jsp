@@ -4,17 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시험 페이지</title>
+<title>문제 수정</title>
 </head>
 <body>
-	
-	<form action="insertResult" method="post">
-		<h3>[시험 페이지]</h3>		
-		<h3>[과목 : ${subjectName }]</h3>
-		<input type="hidden" value="${subjectName }" name="subjectName">
-		<div>
+<h4>[문제 수정]</h4>
+	<div>
+	<form action="modify" method="post">
+		<span>과목 선택</span>
+		<select id="subject" name="subjectName" onchange="$('form').submit()">
+			<option ${subjectName eq 'bread' ? 'selected' : '' } value="bread">빵</option>
+			<option ${subjectName eq 'fruit' ? 'selected' : '' } value="fruit">과일</option>
+			<option ${subjectName eq 'icecream' ? 'selected' : '' } value="icecream">아이스크림</option>
+			<option ${subjectName eq 'snack' ? 'selected' : '' } value="snack">과자</option>
+		</select>
+	</form>
+	<!-- <input type="hidden" name="subjectName" value="${subjectName}" /> -->
+	</div>
+	<br/><button>문제 추가</button><br/><br/>
+	<div>
+		<c:if test="${!empty listQuestion}">
 			<c:forEach var="list" items="${listQuestion}">
-			
 				<div>
 					[${list.test_num }].
 					${list.test_problem }
@@ -34,23 +43,12 @@
 							<td><label for="${list.test_num}_4">4</label><input type="radio" value="4" id="${list.test_num}_4" name="q${list.test_num}" /></td>
 						</tr>
 					</table>
+					<button onclick="location.href='update?test_num=${list.test_num}&subjectName=${subjectName}'">문제 수정</button>
+					<button>문제 삭제</button>
 				</div>
 			</c:forEach>
-		</div>
-		<div>
-			<input type="submit" value="답안제출" />
-		</div>
-	</form>
+		</c:if>
+	</div>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

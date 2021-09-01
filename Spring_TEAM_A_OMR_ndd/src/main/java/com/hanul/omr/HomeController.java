@@ -4,6 +4,8 @@ import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +28,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public String listQuestion(Model model ,String subjectName) {
 		List<TestVO> listQuestion = service.listQuestion(subjectName);
 		model.addAttribute("listQuestion", listQuestion);
@@ -52,11 +54,50 @@ public class HomeController {
 		return "";
 	}
 	
-	@RequestMapping("modify")
-	public String modifyQuestion(TestVO vo, String subjectName) {
+	@RequestMapping("update")
+	public String updateQuestion(TestVO vo, String subjectName, String test_num) {
+		
+		
 		service.modifyQuestion(vo, subjectName);
 		return "";
 	}
+	
+	@RequestMapping("modify")
+	public String modifyQuestion(Model model, TestVO vo, String subjectName) {
+		List<TestVO> listQuestion = null;
+		if(subjectName == null) {
+			model.addAttribute("listQuestion", listQuestion);
+			model.addAttribute("subjectName", subjectName);
+		}else {
+			listQuestion = service.listQuestion(subjectName);
+			model.addAttribute("listQuestion", listQuestion);
+			model.addAttribute("subjectName", subjectName);
+		}
+		return "test/modify";
+	}
+	/*
+	 * @RequestMapping("list.hr") public String listHr(Model model, String dept_id,
+	 * HttpSession session) { session.setAttribute("category", "hr"); //dept_id 값이
+	 * 있는지 없는지에 따라 전체목록을 조회할 것이지, 아니면 조건에 따라 검색할 것인지 //부서 정보가 없다면(또는 departments
+	 * table에 데이터가 없을 때) ▶ 전체 조회가 되어야 함 List<DepartmentVO> depts =
+	 * service.department_list(); //null : 파라미터가 없는 경우 //all : 전체 조회를 위한 파라메터 if
+	 * (dept_id == null || dept_id.equals("all")) { model.addAttribute("list",
+	 * service.employee_list()); }else { model.addAttribute("list",
+	 * service.employee_list(dept_id)); }
+	 * 
+	 * //for (DepartmentVO departmentVO : depts) { //
+	 * System.out.println(departmentVO.getDepartment_name()); //}
+	 * 
+	 * model.addAttribute("dept_id", (dept_id == null || dept_id.equals("all") ?
+	 * "all" : dept_id)); model.addAttribute("depts", depts); return
+	 * "employee/list"; }
+	 */
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("insertQuestion")
 	public String insertQuestion(TestVO vo, String subjectName) {
@@ -64,7 +105,10 @@ public class HomeController {
 		return "";
 	}
 	
-	
-	
+	//페이지 수정용 깡통 매핑
+	@RequestMapping("/testing")
+	public String testing() {
+		return "test/modify";
+	}
 	
 }
