@@ -28,4 +28,16 @@ public class TestDAO implements TestService{
 		return null;
 	}
 
+	@Override
+	public int modifyQuestion(TestVO vo, String subjectName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertQuestion(TestVO vo, String subjectName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

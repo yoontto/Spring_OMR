@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>시험 선택</h1>
-<form action="test" method="post">
+<form action="list" method="post">
 	<div>
 		<select id="sel" name="subjectName">
 			<option value="bread">빵</option>
@@ -19,7 +19,6 @@
 		</select>
 	</div>
 	<input type="submit" value="선택">
-	<input type="reset" value="취소">
 </form>
 </body>
 </html>
