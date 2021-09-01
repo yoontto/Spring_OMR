@@ -46,7 +46,7 @@ CREATE TABLE teamA_test_bread (
   CONSTRAINT bread_num_pk  PRIMARY KEY(test_num));
   
 
-
+select * from teamA_candidate ;
 --2. Candidate table : 응시정보 테이블 생성
 CREATE TABLE teamA_candidate (
   candidate_num         number,         --응시번호. pk키
