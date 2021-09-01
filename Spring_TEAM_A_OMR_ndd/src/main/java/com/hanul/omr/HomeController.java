@@ -29,10 +29,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/list")
-	public String listQuestion(Model model ,String subjectName) {
-		List<TestVO> listQuestion = service.listQuestion(subjectName);
+	public String listQuestion(Model model ,String test_name) {
+		List<TestVO> listQuestion = service.listQuestion(test_name);
 		model.addAttribute("listQuestion", listQuestion);
-		model.addAttribute("subjectName", subjectName);
+		model.addAttribute("test_name", test_name);
 		for (TestVO testVO : listQuestion) {
 			System.out.println(testVO.getTest_answer());
 		}
@@ -41,74 +41,63 @@ public class HomeController {
 	
 	
 	@RequestMapping("get")
-	public String getResult(Model model, String subjectName) {
-		List<ResultVO> getResult = service.getResult(subjectName);
+	public String getResult(Model model, String test_name) {
+		List<ResultVO> getResult = service.getResult(test_name);
 		model.addAttribute("getResult", getResult);
 		return "";
 	}
 	
 	@RequestMapping("insertResult")
-	public String insertResult(ResultVO vo, String subjectName) {
+	public String insertResult(ResultVO vo, String test_name) {
 		//ArrayList<ResultVO> list
-		service.insertResult(vo, subjectName);
+		service.insertResult(vo, test_name);
 		return "";
 	}
 	
 	@RequestMapping("update")
-	public String updateQuestion(TestVO vo, String subjectName, String test_num) {
+	public String updateQuestion(TestVO vo, String test_name, String test_num) {
 		
-		
-		service.modifyQuestion(vo, subjectName);
+		service.modifyQuestion(vo, test_name);
 		return "";
 	}
 	
 	@RequestMapping("modify")
-	public String modifyQuestion(Model model, TestVO vo, String subjectName) {
+	public String modifyQuestion(Model model, TestVO vo, String test_name) {
 		List<TestVO> listQuestion = null;
-		if(subjectName == null) {
+		if(test_name == null) {
 			model.addAttribute("listQuestion", listQuestion);
-			model.addAttribute("subjectName", subjectName);
+			model.addAttribute("test_name", test_name);
 		}else {
-			listQuestion = service.listQuestion(subjectName);
+			listQuestion = service.listQuestion(test_name);
 			model.addAttribute("listQuestion", listQuestion);
-			model.addAttribute("subjectName", subjectName);
+			model.addAttribute("test_name", test_name);
 		}
 		return "test/modify";
 	}
+	
 	/*
-	 * @RequestMapping("list.hr") public String listHr(Model model, String dept_id,
-	 * HttpSession session) { session.setAttribute("category", "hr"); //dept_id 값이
-	 * 있는지 없는지에 따라 전체목록을 조회할 것이지, 아니면 조건에 따라 검색할 것인지 //부서 정보가 없다면(또는 departments
-	 * table에 데이터가 없을 때) ▶ 전체 조회가 되어야 함 List<DepartmentVO> depts =
-	 * service.department_list(); //null : 파라미터가 없는 경우 //all : 전체 조회를 위한 파라메터 if
-	 * (dept_id == null || dept_id.equals("all")) { model.addAttribute("list",
-	 * service.employee_list()); }else { model.addAttribute("list",
-	 * service.employee_list(dept_id)); }
-	 * 
-	 * //for (DepartmentVO departmentVO : depts) { //
-	 * System.out.println(departmentVO.getDepartment_name()); //}
-	 * 
-	 * model.addAttribute("dept_id", (dept_id == null || dept_id.equals("all") ?
-	 * "all" : dept_id)); model.addAttribute("depts", depts); return
-	 * "employee/list"; }
-	 */
-	
-	
-	
-	
-	
-	
+	@RequestMapping("search")
+	public String searchQuestion(Model model, String test_name, String test_num) {
+		TestVO vo = null;
+		vo.setTest_name(test_name);
+		
+		service.searchQuestion(, test_num);
+		return "test/update";
+	}
+	*/
 	
 	@RequestMapping("insertQuestion")
-	public String insertQuestion(TestVO vo, String subjectName) {
-		service.insertQuestion(vo, subjectName);
+	public String insertQuestion(TestVO vo, String test_name) {
+		service.insertQuestion(vo, test_name);
 		return "";
 	}
 	
 	//페이지 수정용 깡통 매핑
 	@RequestMapping("/testing")
 	public String testing() {
-		return "test/modify";
+		
+		
+		return "test/imsi";
 	}
 	
 }

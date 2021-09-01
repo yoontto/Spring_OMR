@@ -11,14 +11,14 @@
 	<div>
 	<form action="modify" method="post">
 		<span>과목 선택</span>
-		<select id="subject" name="subjectName" onchange="$('form').submit()">
-			<option ${subjectName eq 'bread' ? 'selected' : '' } value="bread">빵</option>
-			<option ${subjectName eq 'fruit' ? 'selected' : '' } value="fruit">과일</option>
-			<option ${subjectName eq 'icecream' ? 'selected' : '' } value="icecream">아이스크림</option>
-			<option ${subjectName eq 'snack' ? 'selected' : '' } value="snack">과자</option>
+		<select id="subject" name="test_name" onchange="$('form').submit()">
+			<option ${test_name eq 'bread' ? 'selected' : '' } value="bread">빵</option>
+			<option ${test_name eq 'fruit' ? 'selected' : '' } value="fruit">과일</option>
+			<option ${test_name eq 'icecream' ? 'selected' : '' } value="icecream">아이스크림</option>
+			<option ${test_name eq 'snack' ? 'selected' : '' } value="snack">과자</option>
 		</select>
 	</form>
-	<!-- <input type="hidden" name="subjectName" value="${subjectName}" /> -->
+	<!-- <input type="hidden" name="test_name" value="${test_name}" /> -->
 	</div>
 	<br/><button>문제 추가</button><br/><br/>
 	<div>
@@ -43,7 +43,8 @@
 							<td><label for="${list.test_num}_4">4</label><input type="radio" value="4" id="${list.test_num}_4" name="q${list.test_num}" /></td>
 						</tr>
 					</table>
-					<button onclick="location.href='update?test_num=${list.test_num}&subjectName=${subjectName}'">문제 수정</button>
+					<button onclick="location.href='update?test_num=${list.test_num}&test_name=${test_name}'">문제 수정</button>
+					<button>문제 수정</button>
 					<button>문제 삭제</button>
 				</div>
 			</c:forEach>

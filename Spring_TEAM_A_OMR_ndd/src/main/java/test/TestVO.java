@@ -8,7 +8,14 @@ public class TestVO {
 	private String test_choice2;
 	private String test_choice3;
 	private String test_choice4;
-
+    private String test_name;
+    
+    public String getTest_name() {
+       return test_name;
+    }
+    public void setTest_name(String test_name) {
+       this.test_name = test_name;
+    }
 
 	public int getTest_num() {
 		return test_num;
