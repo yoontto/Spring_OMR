@@ -43,9 +43,10 @@ public class TestDAO implements TestService{
 	}
 
 	@Override
-	public List<TestVO> searchQuestion(String test_name, String test_num) {
+	public List<TestVO> searchQuestion(TestVO vo) {
 		// TODO Auto-generated method stub
-		return sql.selectOne("searchQuestion", test_name, test_num);
+		System.out.println(vo.getTest_num() + vo.getTest_name());
+		return sql.selectList("omr.mapper.searchQuestion", vo);
 	}
 
 

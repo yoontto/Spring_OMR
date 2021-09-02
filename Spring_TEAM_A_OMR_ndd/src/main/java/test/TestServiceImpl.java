@@ -41,9 +41,9 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public List<TestVO> searchQuestion(String test_name, String test_num) {
+	public List<TestVO> searchQuestion(TestVO vo) {
 		// TODO Auto-generated method stub
-		return dao.searchQuestion(test_name, test_num);
+		return dao.searchQuestion(vo);
 	}
 
 

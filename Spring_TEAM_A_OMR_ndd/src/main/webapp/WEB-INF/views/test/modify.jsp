@@ -43,8 +43,8 @@
 							<td><label for="${list.test_num}_4">4</label><input type="radio" value="4" id="${list.test_num}_4" name="q${list.test_num}" /></td>
 						</tr>
 					</table>
-					<button onclick="location.href='update?test_num=${list.test_num}&test_name=${test_name}'">문제 수정</button>
-					<button>문제 수정</button>
+					<button onclick="location.href='search?test_num=${list.test_num}&test_name=${test_name}'">문제 수정</button>
+					<!-- <button onclick="location.href='search'">문제 수정</button> -->
 					<button>문제 삭제</button>
 				</div>
 			</c:forEach>

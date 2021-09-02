@@ -54,16 +54,12 @@ public class HomeController {
 		return "";
 	}
 	
-	@RequestMapping("update")
-	public String updateQuestion(TestVO vo, String test_name, String test_num) {
-		
-		service.modifyQuestion(vo, test_name);
-		return "";
-	}
-	
 	@RequestMapping("modify")
-	public String modifyQuestion(Model model, TestVO vo, String test_name) {
+	public String modifyQuestion(Model model, String test_name) {
+		
+		//List<TestVO> listQuestion = service.listQuestion(test_name);
 		List<TestVO> listQuestion = null;
+		
 		if(test_name == null) {
 			model.addAttribute("listQuestion", listQuestion);
 			model.addAttribute("test_name", test_name);
@@ -75,16 +71,27 @@ public class HomeController {
 		return "test/modify";
 	}
 	
-	/*
 	@RequestMapping("search")
-	public String searchQuestion(Model model, String test_name, String test_num) {
-		TestVO vo = null;
+	public String searchQuestion(Model model, String test_name, int test_num) {
+		System.out.println("과목: " + test_name + "문제번호: " + test_num);
+		TestVO vo = new TestVO();
 		vo.setTest_name(test_name);
+		vo.setTest_num(test_num);
 		
-		service.searchQuestion(, test_num);
+		List<TestVO> searchQuestion = service.searchQuestion(vo);
+		
+		model.addAttribute("searchQuestion", searchQuestion);
+		model.addAttribute("test_name", test_name);
+		System.out.println(searchQuestion.get(0).getTest_problem());
 		return "test/update";
 	}
-	*/
+	
+	@RequestMapping("update")
+	public String updateQuestion(TestVO vo, String test_name, String test_num) {
+		
+		service.modifyQuestion(vo, test_name);
+		return "";
+	}
 	
 	@RequestMapping("insertQuestion")
 	public String insertQuestion(TestVO vo, String test_name) {

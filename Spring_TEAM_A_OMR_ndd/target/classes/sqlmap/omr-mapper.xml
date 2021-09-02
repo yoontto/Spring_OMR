@@ -7,6 +7,11 @@
   </select>
   
   <select id="listQuestion" resultType="test.TestVO">
-  	select * from teama_test_${subjectName}
+  	select * from teama_test_${test_name}
+  </select>
+  
+  <select id="searchQuestion" resultType="test.TestVO">
+   	select * from teama_test_${test_name} where test_num = ${test_num}
+
   </select>
 </mapper>
