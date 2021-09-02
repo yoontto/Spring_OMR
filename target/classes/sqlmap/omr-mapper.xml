@@ -8,5 +8,9 @@
 <select id="result" resultType="test.TestVO">	
   	select * from ${subjectName}
 </select>
+<insert id="insert" parameterType="test.ResultVO">
+	insert into teama_candidate 
+	values(CANDIDATE_NUM = #{CANDIDATE_NUM}, CANDIDATE_TEST_NAME=#{subjectName}, CANDIDATE_GET_RIGHT=#{CANDIDATE_GET_RIGHT})
+</insert>
 
 </mapper>

@@ -7,18 +7,25 @@
 <head>
 	<title>home</title>
 </head>
+<style>
+	@import url(css/general.css);
+</style>
 <body>
-<h1>시험 선택</h1>
-<form action="list" method="post">
-	<div>
-		<select id="sel" name="subjectName">
-			<option value="bread">빵</option>
-			<option value="snack">과자</option>
-			<option value="icecream">아이스크림</option>
-			<option value="fruit">과일</option>
-		</select>
+<div id="container">
+	<div id="item">
+		<h1>시험 선택</h1>
+		<form action="list" method="post">
+			<div>
+				<select id="sel" name="subjectName">
+					<option value="bread">빵</option>
+					<option value="snack">과자</option>
+					<option value="icecream">아이스크림</option>
+					<option value="fruit">과일</option>
+				</select>
+				<input type="submit" value="선택">
+			</div>
+		</form>
 	</div>
-	<input type="submit" value="선택">
-</form>
+</div>
 </body>
 </html>

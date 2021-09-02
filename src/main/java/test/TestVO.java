@@ -1,6 +1,7 @@
 package test;
 
 public class TestVO {
+	private String test_name;
 	private int test_num;
 	private String test_problem;
 	private int test_answer;
@@ -10,6 +11,12 @@ public class TestVO {
 	private String test_choice4;
 	
 	
+	public String getTest_name() {
+		return test_name;
+	}
+	public void setTest_name(String test_name) {
+		this.test_name = test_name;
+	}
 	public int getTest_num() {
 		return test_num;
 	}

@@ -26,12 +26,6 @@ public class TestServiceImpl implements TestService{
 	 */
 
 	@Override
-	public int insertResult(ResultVO vo, String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<ResultVO> getResult(String subjectName) {
 		// TODO Auto-generated method stub
 		return null;
@@ -44,7 +38,18 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public int insertQuestion(TestVO vo, String subjectName) {
+	public void insertQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public int insertResult(List<String> answer_arr, String subjectName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double avgResult(String subjectName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
