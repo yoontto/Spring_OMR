@@ -10,7 +10,7 @@
 <body>
 <form action="list" method="post">
 	<h4>과목 선택</h4>
-	<select name="subjectName">
+	<select name="test_name">
 		<option value="bread">빵</option>
 		<option value="fruit">과일</option>
 		<option value="icecream">아이스크림</option>

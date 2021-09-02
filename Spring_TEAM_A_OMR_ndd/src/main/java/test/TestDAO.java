@@ -13,33 +13,39 @@ public class TestDAO implements TestService{
 
 	
 	@Override
-	public List<TestVO> listQuestion(String subjectName) {
-		//System.out.println("subjectName: " + subjectName);
-		return sql.selectList("omr.mapper.listQuestion", subjectName);
+	public List<TestVO> listQuestion(String test_name) {
+		//System.out.println("test_name: " + test_name);
+		return sql.selectList("omr.mapper.listQuestion", test_name);
 	}
 
 	@Override
-	public int insertResult(ResultVO vo, String subjectName) {
+	public int insertResult(ResultVO vo, String test_name) {
 		// TODO Auto-generated method stub
-		return 0;//sql.insert("omr.mapper.saveResult", subjectName);
+		return 0;//sql.insert("omr.mapper.saveResult", test_name);
 	}
 
 	@Override
-	public List<ResultVO> getResult(String subjectName) {
+	public List<ResultVO> getResult(String test_name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int modifyQuestion(TestVO vo, String subjectName) {
+	public int modifyQuestion(TestVO vo, String test_name) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int insertQuestion(TestVO vo, String subjectName) {
+	public int insertQuestion(TestVO vo, String test_name) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<TestVO> searchQuestion(String test_name, String test_num) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("searchQuestion", test_name, test_num);
 	}
 
 

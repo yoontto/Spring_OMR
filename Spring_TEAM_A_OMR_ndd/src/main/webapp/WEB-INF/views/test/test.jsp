@@ -8,10 +8,10 @@
 </head>
 <body>
 	
-	<form action="insertResult" method="post">
+	<form action="testing" method="post">
 		<h3>[시험 페이지]</h3>		
-		<h3>[과목 : ${subjectName }]</h3>
-		<input type="hidden" value="${subjectName }" name="subjectName">
+		<h3>[과목 : ${test_name }]</h3>
+		<input type="hidden" value="${test_name }" name="test_name">
 		<div>
 			<c:forEach var="list" items="${listQuestion}">
 			
