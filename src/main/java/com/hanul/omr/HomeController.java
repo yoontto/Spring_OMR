@@ -147,8 +147,8 @@ public class HomeController {
 	
 	@RequestMapping("delete")
 	public String delete(String subject, int pnum) {
+		System.out.println("subject" + subject + "pnum" + pnum);
 		service.deleteQuestion(subject, pnum);
-		return "test/modify"; 
+		return "test/test"; 
 	}
-	
 }

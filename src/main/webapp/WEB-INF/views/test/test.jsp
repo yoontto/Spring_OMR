@@ -22,7 +22,7 @@
 				<c:set var="test_num" value="${test_num + 1}"/>
 				<div>
 				<input type="button" value="문제 수정" onclick="location.href='search?test_num=${test_num}&test_name=${subjectName}'">
-				<button onclick="fnDelete('${list.test_num }')">문제 삭제</button>
+				<input type="button" value="문제 삭제" onclick="fnDelete('${list.test_num }')" >문제 삭제
 					[${list.test_num}].
 					${list.test_problem }
 				</div>
@@ -50,7 +50,8 @@
 	</form>
 <script type="text/javascript">
 	function fnDelete(test_num) {
-		var subject = $("#subject option:selected").val();
+		var subject = "${subjectName}";
+		alert(subject, test_num);
 		$.ajax({
 			type:'post',
 			url : 'delete',
@@ -58,7 +59,6 @@
 			success: function ( response ) {
 				alert("문제가 삭제되었습니다.");
 				location.reload();
-				
 			},error : function (req,text) {
 				alert(subject);
 				alert(text + " : " + req.status);
