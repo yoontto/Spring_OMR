@@ -12,10 +12,10 @@ public class ResultVO {
 	public void setCandidate_num(int candidate_num) {
 		this.candidate_num = candidate_num;
 	}
-	public String getCandidate_test_name() {
+	public String getCandidate_subjectName() {
 		return candidate_test_name;
 	}
-	public void setCandidate_test_name(String candidate_test_name) {
+	public void setCandidate_subjectName(String candidate_test_name) {
 		this.candidate_test_name = candidate_test_name;
 	}
 	public int getCandidate_get_right() {

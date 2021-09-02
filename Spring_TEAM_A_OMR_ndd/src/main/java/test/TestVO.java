@@ -8,13 +8,13 @@ public class TestVO {
 	private String test_choice2;
 	private String test_choice3;
 	private String test_choice4;
-    private String test_name;
+    private String subjectName;
     
-    public String getTest_name() {
-       return test_name;
+    public String getsubjectName() {
+       return subjectName;
     }
-    public void setTest_name(String test_name) {
-       this.test_name = test_name;
+    public void setsubjectName(String subjectName) {
+       this.subjectName = subjectName;
     }
 
 	public int getTest_num() {

@@ -4,6 +4,7 @@ import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,10 +30,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/list")
-	public String listQuestion(Model model ,String test_name) {
-		List<TestVO> listQuestion = service.listQuestion(test_name);
+	public String listQuestion(Model model ,String subjectName) {
+		List<TestVO> listQuestion = service.listQuestion(subjectName);
 		model.addAttribute("listQuestion", listQuestion);
-		model.addAttribute("test_name", test_name);
+		model.addAttribute("subjectName", subjectName);
 		for (TestVO testVO : listQuestion) {
 			System.out.println(testVO.getTest_answer());
 		}
@@ -41,61 +42,79 @@ public class HomeController {
 	
 	
 	@RequestMapping("get")
-	public String getResult(Model model, String test_name) {
-		List<ResultVO> getResult = service.getResult(test_name);
+	public String getResult(Model model, String subjectName) {
+		List<ResultVO> getResult = service.getResult(subjectName);
 		model.addAttribute("getResult", getResult);
 		return "";
 	}
 	
 	@RequestMapping("insertResult")
-	public String insertResult(ResultVO vo, String test_name) {
+	public String insertResult(ResultVO vo, String subjectName) {
 		//ArrayList<ResultVO> list
-		service.insertResult(vo, test_name);
+		service.insertResult(vo, subjectName);
 		return "";
 	}
 	
 	@RequestMapping("modify")
-	public String modifyQuestion(Model model, String test_name) {
+	public String modifyQuestion(Model model, String subjectName) {
 		
-		//List<TestVO> listQuestion = service.listQuestion(test_name);
+		//List<TestVO> listQuestion = service.listQuestion(subjectName);
 		List<TestVO> listQuestion = null;
 		
-		if(test_name == null) {
+		if(subjectName == null) {
 			model.addAttribute("listQuestion", listQuestion);
-			model.addAttribute("test_name", test_name);
+			model.addAttribute("subjectName", subjectName);
 		}else {
-			listQuestion = service.listQuestion(test_name);
+			listQuestion = service.listQuestion(subjectName);
 			model.addAttribute("listQuestion", listQuestion);
-			model.addAttribute("test_name", test_name);
+			model.addAttribute("subjectName", subjectName);
 		}
 		return "test/modify";
 	}
 	
 	@RequestMapping("search")
-	public String searchQuestion(Model model, String test_name, int test_num) {
-		System.out.println("과목: " + test_name + "문제번호: " + test_num);
+	public String searchQuestion(Model model, String subjectName, int test_num) {
+		System.out.println("과목: " + subjectName + "문제번호: " + test_num);
 		TestVO vo = new TestVO();
-		vo.setTest_name(test_name);
+		vo.setsubjectName(subjectName);
 		vo.setTest_num(test_num);
 		
 		List<TestVO> searchQuestion = service.searchQuestion(vo);
 		
 		model.addAttribute("searchQuestion", searchQuestion);
-		model.addAttribute("test_name", test_name);
+		model.addAttribute("subjectName", subjectName);
 		System.out.println(searchQuestion.get(0).getTest_problem());
 		return "test/update";
 	}
 	
 	@RequestMapping("update")
-	public String updateQuestion(TestVO vo, String test_name, String test_num) {
+	public String updateQuestion(Model model, HttpServletRequest request, TestVO vo) {
+		int test_num = Integer.parseInt(request.getParameter("test_num")) ;
+		String subjectName = request.getParameter("subjectName");
+		String test_problem = request.getParameter("test_problem");
+		String test_choice1 = request.getParameter("test_choice1");
+		String test_choice2 = request.getParameter("test_choice2");
+		String test_choice3 = request.getParameter("test_choice3");
+		String test_choice4 = request.getParameter("test_choice4");
+		int test_answer = Integer.parseInt(request.getParameter("test_answer"));
 		
-		service.modifyQuestion(vo, test_name);
-		return "";
+		vo.setTest_num(test_num);
+		vo.setsubjectName(subjectName);
+		vo.setTest_problem(test_problem);
+		vo.setTest_choice1(test_choice1);
+		vo.setTest_choice2(test_choice2);
+		vo.setTest_choice3(test_choice3);
+		vo.setTest_choice4(test_choice4);
+		vo.setTest_answer(test_answer);
+		
+		service.updateQuestion(vo);
+		model.addAttribute(subjectName);
+		return "test/modify";
 	}
 	
 	@RequestMapping("insertQuestion")
-	public String insertQuestion(TestVO vo, String test_name) {
-		service.insertQuestion(vo, test_name);
+	public String insertQuestion(TestVO vo, String subjectName) {
+		service.insertQuestion(vo, subjectName);
 		return "";
 	}
 	

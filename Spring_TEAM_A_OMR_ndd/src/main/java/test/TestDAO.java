@@ -13,31 +13,31 @@ public class TestDAO implements TestService{
 
 	
 	@Override
-	public List<TestVO> listQuestion(String test_name) {
-		//System.out.println("test_name: " + test_name);
-		return sql.selectList("omr.mapper.listQuestion", test_name);
+	public List<TestVO> listQuestion(String subjectName) {
+		//System.out.println("subjectName: " + subjectName);
+		return sql.selectList("omr.mapper.listQuestion", subjectName);
 	}
 
 	@Override
-	public int insertResult(ResultVO vo, String test_name) {
+	public int insertResult(ResultVO vo, String subjectName) {
 		// TODO Auto-generated method stub
-		return 0;//sql.insert("omr.mapper.saveResult", test_name);
+		return 0;//sql.insert("omr.mapper.saveResult", subjectName);
 	}
 
 	@Override
-	public List<ResultVO> getResult(String test_name) {
+	public List<ResultVO> getResult(String subjectName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int modifyQuestion(TestVO vo, String test_name) {
+	public int modifyQuestion(TestVO vo, String subjectName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int insertQuestion(TestVO vo, String test_name) {
+	public int insertQuestion(TestVO vo, String subjectName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -45,8 +45,14 @@ public class TestDAO implements TestService{
 	@Override
 	public List<TestVO> searchQuestion(TestVO vo) {
 		// TODO Auto-generated method stub
-		System.out.println(vo.getTest_num() + vo.getTest_name());
+		System.out.println(vo.getTest_num() + vo.getsubjectName());
 		return sql.selectList("omr.mapper.searchQuestion", vo);
+	}
+
+	@Override
+	public int updateQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		return sql.update("omr.mapper.updateQuestion", vo);
 	}
 
 

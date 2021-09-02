@@ -11,39 +11,45 @@ public class TestServiceImpl implements TestService{
 	
 	
 	@Override
-	public List<TestVO> listQuestion(String test_name) {
+	public List<TestVO> listQuestion(String subjectName) {
 		// TODO Auto-generated method stub
-		return dao.listQuestion(test_name);
+		return dao.listQuestion(subjectName);
 	}
 
 	@Override
-	public int insertResult(ResultVO vo, String test_name) {
+	public int insertResult(ResultVO vo, String subjectName) {
 		// TODO Auto-generated method stub
-		return dao.insertResult(vo, test_name);
+		return dao.insertResult(vo, subjectName);
 	}
 
 	@Override
-	public List<ResultVO> getResult(String test_name) {
+	public List<ResultVO> getResult(String subjectName) {
 		// TODO Auto-generated method stub
-		return dao.getResult(test_name);
+		return dao.getResult(subjectName);
 	}
 
 	@Override
-	public int modifyQuestion(TestVO vo, String test_name) {
+	public int modifyQuestion(TestVO vo, String subjectName) {
 		// TODO Auto-generated method stub
-		return dao.modifyQuestion(vo, test_name);
+		return dao.modifyQuestion(vo, subjectName);
 	}
 
 	@Override
-	public int insertQuestion(TestVO vo, String test_name) {
+	public int insertQuestion(TestVO vo, String subjectName) {
 		// TODO Auto-generated method stub
-		return dao.insertQuestion(vo, test_name);
+		return dao.insertQuestion(vo, subjectName);
 	}
 
 	@Override
 	public List<TestVO> searchQuestion(TestVO vo) {
 		// TODO Auto-generated method stub
 		return dao.searchQuestion(vo);
+	}
+
+	@Override
+	public int updateQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		return dao.updateQuestion(vo);
 	}
 
 

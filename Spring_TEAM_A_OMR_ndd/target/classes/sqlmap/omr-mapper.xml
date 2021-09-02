@@ -7,11 +7,23 @@
   </select>
   
   <select id="listQuestion" resultType="test.TestVO">
-  	select * from teama_test_${test_name}
+  	select * from teama_test_${subjectName}
   </select>
   
   <select id="searchQuestion" resultType="test.TestVO">
-   	select * from teama_test_${test_name} where test_num = ${test_num}
-
+   	select * from teama_test_${subjectName} where test_num = ${test_num}
   </select>
+  
+  <update id="updateQuestion" parameterType="test.TestVO" >
+	update teama_test_${subjectName}
+	set test_problem = #{test_problem},
+	    test_choice1 = #{test_choice1},
+	    test_choice2 = #{test_choice2},
+	    test_choice3 = #{test_choice3},
+	    test_choice4 = #{test_choice4},
+	    test_answer = ${test_answer}
+	where test_num = ${test_num}
+  </update>
+  
+  
 </mapper>
