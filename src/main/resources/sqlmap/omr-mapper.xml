@@ -12,5 +12,15 @@
 	insert into teama_candidate 
 	values(CANDIDATE_NUM = #{CANDIDATE_NUM}, CANDIDATE_TEST_NAME=#{subjectName}, CANDIDATE_GET_RIGHT=#{CANDIDATE_GET_RIGHT})
 </insert>
+ <select id="listQuestion" resultType="test.TestVO">
+  	select * from teama_test_${test_name}
+  </select>
+  
+  <select id="searchQuestion" resultType="test.TestVO">
+   	select * from teama_test_${test_name} where test_num = ${test_num}
 
+  </select>
+  <delete id="delete" parameterType="HashMap">
+  	delete from ${subject} where TEST_NUM = ${pnum}
+  </delete>
 </mapper>

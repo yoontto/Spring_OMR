@@ -65,11 +65,11 @@ public class HomeController {
 
 	// 응시자의 응답 저장 : 영은
 	@RequestMapping("result")
-	public String list(Model model, String subjectName, int problem_num, HttpServletRequest request) {
+	public String list(Model model, String subjectName, int test_num, HttpServletRequest request) {
 
 		String answer = null;
 		List<String> answer_arr = new ArrayList<String>();
-		for (int i = 1; i <= problem_num; i++) {
+		for (int i = 1; i <= test_num; i++) {
 			answer = request.getParameter("answer" + i);
 			if (answer == null) {
 				answer = "0";
@@ -113,18 +113,42 @@ public class HomeController {
 		return "redirect:list.test?subjectName=" + subjectName;
 	}
 
-	// 문제 수정 기능
 	@RequestMapping("modify")
-	public String modifyQuestion(TestVO vo, String subjectName) {
-		service.modifyQuestion(vo, subjectName);
-		return "";
+	public String modifyQuestion(Model model, String test_name) {
+		
+		//List<TestVO> listQuestion = service.listQuestion(test_name);
+		List<TestVO> listQuestion = null;
+		
+		if(test_name == null) {
+			model.addAttribute("listQuestion", listQuestion);
+			model.addAttribute("test_name", test_name);
+		}else {
+			listQuestion = service.listQuestion(test_name);
+			model.addAttribute("listQuestion", listQuestion);
+			model.addAttribute("test_name", test_name);
+		}
+		return "test/modify";
 	}
 	
-	/*
-	 * // 대돈 : 평균값 낼때 쓰는 메소드
-	 * 
-	 * @RequestMapping("get") public String getResult(Model model, String
-	 * subjectName) { List<ResultVO> getResult = service.getResult(subjectName);
-	 * model.addAttribute("getResult", getResult); return ""; }
-	 */
+	@RequestMapping("search")
+	public String searchQuestion(Model model, String test_name, int test_num) {
+		System.out.println("과목: " + test_name + "문제번호: " + test_num);
+		TestVO vo = new TestVO();
+		vo.setTest_name(test_name);
+		vo.setTest_num(test_num);
+		
+		List<TestVO> searchQuestion = service.searchQuestion(vo);
+		
+		model.addAttribute("searchQuestion", searchQuestion);
+		model.addAttribute("test_name", test_name);
+		System.out.println(searchQuestion.get(0).getTest_problem());
+		return "test/update";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(String subject, int pnum) {
+		service.deleteQuestion(subject, pnum);
+		return "test/modify"; 
+	}
+	
 }

@@ -54,6 +54,16 @@ public class TestServiceImpl implements TestService{
 		return 0;
 	}
 
+	@Override
+	public List<TestVO> searchQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		return dao.searchQuestion(vo);
+	}
 	
+	@Override
+	public int deleteQuestion(String subject, int pnum) {
+		// TODO Auto-generated method stub
+		return dao.deleteQuestion(subject, pnum);
+	}
 
 }

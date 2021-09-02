@@ -6,11 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>시험 페이지</title>
-<script type="text/javascript">
-function fnInput(){
-	location.href="input.jsp";
-}
-</script>
+
 </head>
 <body>
 	<form action="result" method="get">
@@ -19,12 +15,15 @@ function fnInput(){
 		<h3>[과목 : ${subjectName }]</h3>
 		<input type="hidden" value="${subjectName }" name="subjectName">
 		<div>
-			<input type="button" value="시험문제 추가" onclick="location.href='test.add?subjectName=${subjectName}'"/>
-			<c:set var="problem_num" value="0" />
+			<input type="button" value="시험문제 추가" 
+				onclick="location.href='test.add?subjectName=${subjectName}'"/>
+			<c:set var="test_num" value="0" />
 			<c:forEach var="list" items="${listQuestion}">
-				<c:set var="problem_num" value="${problem_num + 1}"/>
+				<c:set var="test_num" value="${test_num + 1}"/>
 				<div>
-					[${problem_num}].
+				<input type="button" value="문제 수정" onclick="location.href='search?test_num=${test_num}&test_name=${subjectName}'">
+				<button onclick="fnDelete('${list.test_num }')">문제 삭제</button>
+					[${list.test_num}].
 					${list.test_problem }
 				</div>
 				<div>
@@ -36,22 +35,39 @@ function fnInput(){
 				<div>
 					<table>
 						<tr>
-							<td><label for="${problem_num}_1">1</label><input type="radio" value="1" id="${problem_num}_1" name="q${problem_num}" /></td>      
-							<td><label for="${problem_num}_2">2</label><input type="radio" value="2" id="${problem_num}_2" name="q${problem_num}" /></td>
-							<td><label for="${problem_num}_3">3</label><input type="radio" value="3" id="${problem_num}_3" name="q${problem_num}" /></td>
-							<td><label for="${problem_num}_4">4</label><input type="radio" value="4" id="${problem_num}_4" name="q${problem_num}" /></td>
+							<td><label for="${list.test_num}_1">1</label><input type="radio" value="1" id="${list.test_num}_1" name="q${list.test_num}" /></td>      
+							<td><label for="${list.test_num}_2">2</label><input type="radio" value="2" id="${list.test_num}_2" name="q${list.test_num}" /></td>
+							<td><label for="${list.test_num}_3">3</label><input type="radio" value="3" id="${list.test_num}_3" name="q${list.test_num}" /></td>
+							<td><label for="${list.test_num}_4">4</label><input type="radio" value="4" id="${list.test_num}_4" name="q${list.test_num}" /></td>
 						</tr>                 
 					</table>
 				</div>
 			</c:forEach>
 		</div>
 		<div>
-		<input type="hidden" value="${problem_num}" name="problem_num" />
 			<input type="submit" value="답안제출" />
-			<input type="button" value="수정" onclick="fnInput()">
 		</div>
 	</form>
+<script type="text/javascript">
+	function fnDelete(test_num) {
+		var subject = $("#subject option:selected").val();
+		$.ajax({
+			type:'post',
+			url : 'delete',
+			data : { subject:subject,  pnum:test_num },
+			success: function ( response ) {
+				alert("문제가 삭제되었습니다.");
+				location.reload();
+				
+			},error : function (req,text) {
+				alert(subject);
+				alert(text + " : " + req.status);
+			}
+		});
+	}
+</script>
 </body>
+
 </html>
 
 

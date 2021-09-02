@@ -1,5 +1,6 @@
 package test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -60,6 +61,32 @@ public class TestDAO implements TestService{
 	public double avgResult(String subjectName) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public List<TestVO> searchQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		System.out.println(vo.getTest_num() + vo.getTest_name());
+		return sql.selectList("omr.mapper.searchQuestion", vo);
+	}
+	
+	@Override
+	public int deleteQuestion(String subject, int pnum) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		String table_name = null;
+		if(subject.equals("bread")) {
+			table_name = "TEAMA_TEST_BREAD";
+		}else if(subject.equals("fruit")) {
+			table_name = "TEAMA_TEST_FRUIT";
+		}else if(subject.equals("icecream")) {
+			table_name = "TEAMA_TEST_ICECREAM";
+		}else if(subject.equals("snack")) {
+			table_name = "TEAMA_TEST_SNACK";
+		}
+		hm.put("subject", table_name);
+		hm.put("pnum", pnum);
+		System.out.println("테이블 이름 : " + pnum);
+		return sql.delete("omr.mapper.delete", hm);
 	}
 
 }
