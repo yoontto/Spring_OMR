@@ -311,6 +311,6 @@ commit;
 
 
 
-
+select avg(candidate_get_right) from teamA_candidate where candidate_test_name = 'fruit';
 
 
