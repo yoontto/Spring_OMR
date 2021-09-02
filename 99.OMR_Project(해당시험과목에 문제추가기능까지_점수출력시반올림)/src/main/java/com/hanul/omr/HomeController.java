@@ -1,0 +1,108 @@
+package com.hanul.omr;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import test.ResultVO;
+import test.TestServiceImpl;
+import test.TestVO;
+
+@Controller
+public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired private TestServiceImpl service;
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		return "home";
+	}
+	
+	@RequestMapping("/error")
+	public String error(HttpServletRequest request, Model model) {
+		//에러메시지msg 보내기 위한 모델
+		Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
+		//Throwable최상위 오류 처리하는 클래스
+		StringBuffer msg = new StringBuffer();
+		while (exception != null) {
+			msg.append("<p>").append(exception.getMessage()).append("</p>");
+			exception = exception.getCause();//?뭔지 모르겠음
+		}
+		model.addAttribute("msg", msg.toString());
+		int code = (Integer)request.getAttribute("javax.servlet.error.status_code");
+		return "error/" + (code == 404? "404" : "default");
+	}
+	
+	@RequestMapping("list.test")
+	public String list(Model model, String subjectName) {
+		//System.out.println(subjectName);
+		List<TestVO> list = service.listQuestion(subjectName);
+		//System.out.println(list.get(0).getTest_problem());
+		model.addAttribute("list",list);
+		model.addAttribute("subjectName",subjectName);
+		return "test/test";//페이지에 위치.
+	}
+	
+	 //응시자의 응답 저장
+	 @RequestMapping("test.Result")
+	 public String list(Model model, String
+		 subjectName, int problem_num, HttpServletRequest request) {
+		 
+		 String answer = null;
+		 List<String> answer_arr = new ArrayList<String>();
+		 for(int i = 1; i <= problem_num; i++) {
+			 answer = request.getParameter("answer"+i);
+			 if(answer == null) {
+				 answer = "0";
+			 }
+			 answer_arr.add(answer);
+		 }
+		 int score = service.insertResult(answer_arr, subjectName);//db저장 및 맞춘갯수 메소드
+		 List<TestVO> list = service.listQuestion(subjectName);
+		 double avgScore = service.avgResult(subjectName);//과목별 평균점수 메소드 
+		 model.addAttribute("answer_arr", answer_arr);//해당과목별 응시자의 응시답 출력
+		 model.addAttribute("list", list);//해당과목별정답 출력
+		 model.addAttribute("score", score);//수험자의 맞춘갯수 출력
+		 model.addAttribute("avgScore", avgScore);//해당과목별평균점수출력
+		 return "test/testResult";//페이지에 위치.
+	 }
+	 
+	 
+	 @RequestMapping("test.add")
+	 public String testadd(Model model, String subjectName) {
+		 //System.out.println("test.add : " + subjectName);
+		 model.addAttribute("subjectName",subjectName);
+		 return "test/input";
+	 }
+	 
+	 @RequestMapping("addQuestion")
+	 public String addQuestion(Model model, String subjectName, String test_answer,
+			 String test_problem, String test_choice1, String test_choice2, String test_choice3, String test_choice4) {
+		 //System.out.println("addQuestion : " + subjectName);
+		 TestVO vo = new TestVO();
+		 vo.setTest_problem(test_problem);
+		 vo.setTest_choice1(test_choice1);
+		 vo.setTest_choice2(test_choice2);
+		 vo.setTest_choice3(test_choice3);
+		 vo.setTest_choice4(test_choice4);
+		 vo.setTest_answer(Integer.parseInt(test_answer));
+		 String tableName = "teamA_test_"+subjectName;
+		 vo.setTest_name(tableName);
+		 service.insertQuestion(vo);
+		 
+		 return "redirect:list.test?subjectName="+subjectName;
+	 }
+	 
+}
