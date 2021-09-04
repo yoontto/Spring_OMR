@@ -6,51 +6,66 @@
 <head>
 <meta charset="UTF-8">
 <title>시험 페이지</title>
+<style type="text/css">
+	@import url(css/general.css);
+	body{
+		font-size: 1.4rem;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
+<div class="container_test">
 	<form action="result" method="get">
 	<input type="hidden">
-		<h3>[시험 페이지]</h3>		
-		<h3>[과목 : ${subjectName }]</h3>
+		<h3 class="title_test"> 
+			${ subjectName eq 'bread' ? '빵' : '' }
+      		${ subjectName eq 'fruit' ? '과일' : '' }
+      		${ subjectName eq 'icecream' ? '아이스크림' : '' }
+		    ${ subjectName eq 'snack' ? '과자' : '' }
+		</h3>
 		<!-- 시험 종료 타이머 -->
-		<span id="timer"></span>
+		<span id="timer" class="timer_test"></span>
 		<input type="hidden" value="${subjectName }" name="subjectName">
 		<c:set var="problem_num" value="0" />
+		<div class="align_right">
+			<input type="button" class="btn_2" value="시험문제 추가" onclick="location.href='test.add?subjectName=${subjectName}'"/>
+		</div>
 		<div>
-			<input type="button" value="시험문제 추가" 
-				onclick="location.href='test.add?subjectName=${subjectName}'"/>
 			<c:forEach var="list" items="${listQuestion}">
 				<c:set var="problem_num" value="${problem_num + 1}"/>
-				<div>[${problem_num}번 문제].
-				<input type="button" value="문제 수정" onclick="location.href='search?test_num=${list.test_num}&test_name=${subjectName}'">
-				<input type="button" value="문제 삭제" onclick="fnDelete('${list.test_num }')" >문제 삭제
-					${list.test_problem }
-				</div>
-				<div>
-					&nbsp;&nbsp;&nbsp;&nbsp;1. ${list.test_choice1 }<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;2. ${list.test_choice2 }<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;3. ${list.test_choice3 }<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;4. ${list.test_choice4 }
-				</div>
-				<div>
-					<table>
-						<tr>
-							<td><label for="${list.test_num}_1">1</label><input type="radio" value="1" id="${list.test_num}_1" name="q${problem_num}" /></td>      
-							<td><label for="${list.test_num}_2">2</label><input type="radio" value="2" id="${list.test_num}_2" name="q${problem_num}" /></td>
-							<td><label for="${list.test_num}_3">3</label><input type="radio" value="3" id="${list.test_num}_3" name="q${problem_num}" /></td>
-							<td><label for="${list.test_num}_4">4</label><input type="radio" value="4" id="${list.test_num}_4" name="q${problem_num}" /></td>
-						</tr>
-					</table>
+				<div class="item_test">
+					<div class="inner_item_test">
+						<div class="align_right_test">
+							<input type="button" class="btn_2" value="문제 수정" onclick="location.href='search?test_num=${list.test_num}&test_name=${subjectName}'">
+							<input type="button" class="btn_2" value="문제 삭제" onclick="fnDelete('${list.test_num }')" >
+						</div>
+						<div class="align_left_test">${problem_num}.
+							${list.test_problem }
+						</div>
+						<!-- foreach 바꿀수 있지 않을까요? -->
+						<div class="align_left_test">
+							<input type="radio" value="1" class="radio_hidden_test" id="${list.test_num}_1" name="q${problem_num}" />
+							<label for="${list.test_num}_1" class="label_test">1. ${list.test_choice1 }</label><br/>
+							<input type="radio" value="2" class="radio_hidden_test" id="${list.test_num}_2" name="q${problem_num}" />
+							<label for="${list.test_num}_2" class="label_test">2. ${list.test_choice2 }</label><br/>
+							<input type="radio" value="3" class="radio_hidden_test" id="${list.test_num}_3" name="q${problem_num}" />
+							<label for="${list.test_num}_3" class="label_test">3. ${list.test_choice3 }</label><br/>
+							<input type="radio" value="4" class="radio_hidden_test" id="${list.test_num}_4" name="q${problem_num}" />
+							<label for="${list.test_num}_4" class="label_test">4. ${list.test_choice4 }</label>
+						</div>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div>
 			<input type="hidden" value="${problem_num}" name = "problem_num"/>
 			<input type="hidden" value="${test_num}" name = "test_num"/>
 			
-			<input type="submit" value="답안제출" />
+		<div class="btn_3_margin_test">
+			<input type="submit" class="btn_3_test" value="답안제출" />
 		</div>
 	</form>
+</div>
 <script type="text/javascript">
 	function fnDelete(test_num) {
 		var subject = "${subjectName}";
