@@ -1,10 +1,7 @@
 package com.hanul.omr;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,13 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import test.ResultVO;
 import test.TestServiceImpl;
 import test.TestVO;
 
@@ -65,17 +59,17 @@ public class HomeController {
 
 	// 응시자의 응답 저장 : 영은
 	@RequestMapping("result")
-	public String list(Model model, String subjectName, int test_num, HttpServletRequest request) {
-
-		String answer = null;
-		List<String> answer_arr = new ArrayList<String>();
-		for (int i = 1; i <= test_num; i++) {
-			answer = request.getParameter("answer" + i);
-			if (answer == null) {
-				answer = "0";
-			}
-			answer_arr.add(answer);
+	public String list(Model model, String subjectName, int problem_num, HttpServletRequest request) {
+		 String answer = null;
+		 List<String> answer_arr = new ArrayList<String>();
+		 for(int i = 1; i <= problem_num; i++) {
+			 answer = request.getParameter("q"+i);
+			 if(answer == null) {
+				 answer = "0";
+			 }
+			 answer_arr.add(answer);
 		}
+		 
 		int score = service.insertResult(answer_arr, subjectName);// db저장 및 맞춘갯수 메소드
 		List<TestVO> list = service.listQuestion(subjectName);
 		double avgScore = service.avgResult(subjectName);// 과목별 평균점수 메소드
@@ -106,11 +100,11 @@ public class HomeController {
 		vo.setTest_choice3(test_choice3);
 		vo.setTest_choice4(test_choice4);
 		vo.setTest_answer(Integer.parseInt(test_answer));
-		String tableName = "teamA_test_" + subjectName;
-		vo.setTest_name(tableName);
+		//String tableName = "teamA_test_" + subjectName;
+		vo.setTest_name(subjectName);
 		service.insertQuestion(vo);
 
-		return "redirect:list.test?subjectName=" + subjectName;
+		return "redirect:list?subjectName=" + subjectName;
 	}
 
 	@RequestMapping("modify")
@@ -119,7 +113,7 @@ public class HomeController {
 		//List<TestVO> listQuestion = service.listQuestion(test_name);
 		List<TestVO> listQuestion = null;
 		
-		if(test_name == null) {
+		if(test_name == null || test_name.equals("no_select")) {
 			model.addAttribute("listQuestion", listQuestion);
 			model.addAttribute("test_name", test_name);
 		}else {
@@ -141,8 +135,34 @@ public class HomeController {
 		
 		model.addAttribute("searchQuestion", searchQuestion);
 		model.addAttribute("test_name", test_name);
+		
 		System.out.println(searchQuestion.get(0).getTest_problem());
 		return "test/update";
+	}
+	
+	@RequestMapping("update")
+	public String updateQuestion(Model model, HttpServletRequest request, TestVO vo) {
+		int test_num = Integer.parseInt(request.getParameter("test_num")) ;
+		String test_name = request.getParameter("test_name");
+		String test_problem = request.getParameter("test_problem");
+		String test_choice1 = request.getParameter("test_choice1");
+		String test_choice2 = request.getParameter("test_choice2");
+		String test_choice3 = request.getParameter("test_choice3");
+		String test_choice4 = request.getParameter("test_choice4");
+		int test_answer = Integer.parseInt(request.getParameter("test_answer"));
+		
+		vo.setTest_num(test_num);
+		vo.setTest_name(test_name);
+		vo.setTest_problem(test_problem);
+		vo.setTest_choice1(test_choice1);
+		vo.setTest_choice2(test_choice2);
+		vo.setTest_choice3(test_choice3);
+		vo.setTest_choice4(test_choice4);
+		vo.setTest_answer(test_answer);
+		
+		service.updateQuestion(vo);
+		model.addAttribute(test_name);
+		return "test/modify";
 	}
 	
 	@RequestMapping("delete")

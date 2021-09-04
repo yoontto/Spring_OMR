@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>IoT</title>
+<title>TeamA OMR</title>
 <link rel="icon" type="images/x-icon" href="imgs/hanul.ico">
 <link rel="stylesheet" type="text/css" href="css/common.css?v="<%=new java.util.Date().getTime() %>>
 <!-- v?= 시간 넣는 이유 : href 한번만 넣어서 동기화가 안되니까 버전을 줘서 새로고침이 되게 만들어서 적용시킴 -->
@@ -15,7 +15,7 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	<div id="content">
+	<div id="content" >
 		<tiles:insertAttribute name="content"/>
 	</div>
 	<tiles:insertAttribute name="footer"/>

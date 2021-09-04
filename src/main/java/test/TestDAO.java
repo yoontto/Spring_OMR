@@ -16,6 +16,8 @@ public class TestDAO implements TestService{
 	public List<TestVO> listQuestion(String subjectName) {
 		return sql.selectList("omr.mapper.test", subjectName);
 	}
+	
+	
 
 	//응시자 맞춘 갯수 비교/저장
 		public int insertResult(List<String> answer_arr, String subjectName) {
@@ -33,7 +35,7 @@ public class TestDAO implements TestService{
 			rvo.setCandidate_get_right(get_right);
 			
 			System.out.println(rvo.getCandidate_get_right() + ":" + rvo.getCandidate_test_name());
-			sql.insert("test.mapper.insertResult", rvo);
+			sql.insert("omr.mapper.insertResult", rvo);
 			
 			return get_right;
 			  		 
@@ -45,29 +47,32 @@ public class TestDAO implements TestService{
 		return null;
 	}
 
-	@Override
-	public int modifyQuestion(TestVO vo, String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void insertQuestion(TestVO vo) {
-		// TODO Auto-generated method stub
+		System.out.println("vo : " + vo.getTest_name());
+		sql.insert("omr.mapper.insertQuestion", vo);
 	}
 
 
 	@Override
 	public double avgResult(String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sql.selectOne("omr.mapper.avgResult", subjectName);
 	}
 	
 	@Override
 	public List<TestVO> searchQuestion(TestVO vo) {
 		// TODO Auto-generated method stub
-		System.out.println(vo.getTest_num() + vo.getTest_name());
+		System.out.println(vo.getTest_num() + vo.getTest_name() );
 		return sql.selectList("omr.mapper.searchQuestion", vo);
+	}
+	
+	@Override
+	public int updateQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		System.out.println(vo.getTest_num() + vo.getTest_name());
+		return sql.update("omr.mapper.updateQuestion", vo);
 	}
 	
 	@Override
@@ -88,5 +93,7 @@ public class TestDAO implements TestService{
 		System.out.println("테이블 이름 : " + pnum);
 		return sql.delete("omr.mapper.delete", hm);
 	}
+
+
 
 }

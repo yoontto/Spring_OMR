@@ -1,6 +1,5 @@
 package test;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,27 +30,26 @@ public class TestServiceImpl implements TestService{
 		return null;
 	}
 
-	@Override
-	public int modifyQuestion(TestVO vo, String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public void insertQuestion(TestVO vo) {
-		// TODO Auto-generated method stub
+		
+		dao.insertQuestion(vo);
 	}
+	
+
 
 	@Override
 	public int insertResult(List<String> answer_arr, String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
+				
+		return dao.insertResult(answer_arr, subjectName);
 	}
 
 	@Override
 	public double avgResult(String subjectName) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return dao.avgResult(subjectName);
 	}
 
 	@Override
@@ -61,9 +59,16 @@ public class TestServiceImpl implements TestService{
 	}
 	
 	@Override
+	public int updateQuestion(TestVO vo) {
+		// TODO Auto-generated method stub
+		return dao.updateQuestion(vo);
+	}
+	
+	@Override
 	public int deleteQuestion(String subject, int pnum) {
 		// TODO Auto-generated method stub
 		return dao.deleteQuestion(subject, pnum);
 	}
+
 
 }

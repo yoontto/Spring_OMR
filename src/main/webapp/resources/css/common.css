@@ -16,11 +16,12 @@ body{
 
 a:link, a:visited { text-decoration:none; color:#000; }
 
-#content{ padding:20px 0; min-width:1280px; }
 
 img { vertical-align:middle; }
 
- 
+#content{
+	min-height: 586px;
+}
 
 table {
 
@@ -114,7 +115,7 @@ a { cursor:pointer; }
 
 input {
 
-	height:18px; padding: 5px 10px;
+	/* height:18px;  */padding: 5px 10px;
 
 	font-size:15px;  
 
@@ -167,8 +168,6 @@ ul.grid {  width:80%; margin:0 10%  }
  
 
  
-
-select { height:32px;  }
 
 .left { text-align:left; }
 

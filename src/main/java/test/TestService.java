@@ -7,8 +7,8 @@ public interface TestService {
 	int insertResult(List<String> answer_arr,String subjectName);	//DB에 점수 저장
 	List<ResultVO> getResult(String subjectName);	//DB에 저장된 점수 조회
 	double avgResult(String subjectName);//응시답 평균 계산
-	int modifyQuestion(TestVO vo, String subjectName);	//문제 수정
-	void insertQuestion(TestVO vo);	//문제 추가	
+	void insertQuestion(TestVO vo );	//문제 추가
 	List<TestVO> searchQuestion(TestVO vo);//(변수 subjectName : 과목 이름)
 	int deleteQuestion(String subject, int pnum);
+	int updateQuestion(TestVO vo);			//문제 업데이트
 }

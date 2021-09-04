@@ -2,6 +2,7 @@
 --pw     : 0000
 
 --1-1. test table : 과일 문제 테이블 생성
+
 CREATE TABLE teamA_test_fruit (
   test_num              number,         --문제번호. pk키
   test_problem          VARCHAR2(2000),   --문제의 문항.

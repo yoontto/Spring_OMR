@@ -3,24 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="omr.mapper">
 <select id="test" resultType="test.TestVO">
-	select * from teama_test_${subjectName}
+	select * from teama_test_${subjectName} order by test_num
 </select>
 <select id="result" resultType="test.TestVO">	
-  	select * from ${subjectName}
+  	select * from ${subjectName} order by test_num
 </select>
+
 <insert id="insert" parameterType="test.ResultVO">
 	insert into teama_candidate 
-	values(CANDIDATE_NUM = #{CANDIDATE_NUM}, CANDIDATE_TEST_NAME=#{subjectName}, CANDIDATE_GET_RIGHT=#{CANDIDATE_GET_RIGHT})
+	values(CANDIDATE_NUM = ${CANDIDATE_NUM}, CANDIDATE_TEST_NAME=${subjectName}, CANDIDATE_GET_RIGHT=${CANDIDATE_GET_RIGHT})
 </insert>
+
+<insert id="insertResult" parameterType="test.ResultVO">
+   INSERT INTO teamA_candidate(candidate_test_name, candidate_get_right) values('${candidate_test_name}', ${candidate_get_right})
+</insert>
+
  <select id="listQuestion" resultType="test.TestVO">
-  	select * from teama_test_${test_name}
+  	select * from teama_test_${test_name} order by test_num
   </select>
   
   <select id="searchQuestion" resultType="test.TestVO">
-   	select * from teama_test_${test_name} where test_num = ${test_num}
+   	select * from teama_test_${test_name} where test_num = ${test_num} order by test_num
 
   </select>
   <delete id="delete" parameterType="HashMap">
   	delete from ${subject} where TEST_NUM = ${pnum}
   </delete>
+  
+  <select id="avgResult" parameterType="String" resultType="double">
+	select avg(candidate_get_right) from teamA_candidate where candidate_test_name = #{subjectName}
+</select>
+
+<insert id="insertQuestion" parameterType="test.TestVO" >
+	INSERT INTO teama_test_${test_name}(test_problem, test_answer, test_choice1, test_choice2, test_choice3, test_choice4)
+	values (#{test_problem}, #{test_answer}, #{test_choice1}, #{test_choice2}, #{test_choice3}, #{test_choice4})
+</insert>
+
+<update id="updateQuestion" parameterType="test.TestVO" >
+   update teama_test_${test_name}
+   set test_problem = #{test_problem},
+       test_choice1 = #{test_choice1},
+       test_choice2 = #{test_choice2},
+       test_choice3 = #{test_choice3},
+       test_choice4 = #{test_choice4},
+       test_answer = #{test_answer}
+   where test_num = #{test_num}
+</update>
+  
 </mapper>
