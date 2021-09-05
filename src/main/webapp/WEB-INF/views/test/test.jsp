@@ -31,6 +31,7 @@
 		<div class="align_right">
 			<input type="button" class="btn_2" value="시험문제 추가" onclick="location.href='test.add?subjectName=${subjectName}'"/>
 		</div>
+		
 		<div>
 			<c:forEach var="list" items="${listQuestion}">
 				<c:set var="problem_num" value="${problem_num + 1}"/>

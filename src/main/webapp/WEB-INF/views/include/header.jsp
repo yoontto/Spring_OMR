@@ -11,7 +11,7 @@
 				 margin: 0 auto;
 				 height: 150px;
 				 line-height: 150px">
-			<img alt="x" src="imgs/header1.png"  
+			<img alt="x" src="imgs/header1.png" onclick="location.href='/omr'"
 			style="padding: 0; 
 					margin: 0 auto;
 					width: auto;

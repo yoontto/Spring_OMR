@@ -30,6 +30,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
+
+/* 공통 css */
 body{
 	font-family:'Pretendard-Regular', 'sans-serif';
 	font-size: 30px;
@@ -42,21 +44,13 @@ body{
 
 #content{
 	margin: auto 0px;
+	min-height: 600px;
 }
 
 .container{
 	display: flex;
 	background-color: #ebf0f7;
-	min-height: 577px;
-	min-height: 577px;
-}
-
-.container_test{
-	display: flex;
-	justify-content: center;
-	background-color: #ebf0f7;
-	min-height: 577px;
-	min-height: 577px;
+	height: 600px;
 }
 
 .item{
@@ -64,18 +58,6 @@ body{
 	height: 300px;
 	width: 300px;
 	margin: auto;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px gray;
-}
-
-.item_test{
-	background-color: #f5f5f5;
-	min-height: 300px;
-	width: 800px;
-	margin: 10px 0px 20px;
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
@@ -91,25 +73,6 @@ body{
 	padding: 20px;
 }
 
-.inner_item_test{
-	display: flex;
-	height: inherit;
-	flex-direction: column;
-	justify-content: center;
-	font-size: 1.3rem;
-	padding: 15px 30px 20px;
-}
-
-.radio_hidden_test{
-	display: none;
-}
-
-input[type=radio]:checked + label{
-	font-family:'Pretendard-SemiBold';
-	color: #6ca2ec;
-}
-
-
 .title{
 	margin: 0px;
 	padding: 0 20px 10px;
@@ -117,6 +80,73 @@ input[type=radio]:checked + label{
 	color: #293c50;
 	font-size: 2.5rem;
 	font-weight: bold;
+}
+.sel{
+	display: block;
+	margin: 20px auto;
+	border-style:none;
+	height: 30px;
+	width: 150px;
+	box-shadow: 2px 2px 2px gray;
+}
+
+#sel::-ms-expand{
+	display: none;
+	border: 0px;
+}
+
+.btn_1{
+	background-color: #ffffff;
+	border: none;
+	width: 85px;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px gray;
+	font-weight: bold;
+}
+
+.btn_2{
+	background-color: #ffffff;
+	border: none;
+	width: auto;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px gray;
+	font-weight: bold;
+}
+
+.btn_1:hover, .btn_2:hover, .btn_3_test:hover{
+	background-color: #364f6b;
+	color: #ffffff;
+}
+
+
+
+/* test페이지 css */
+.container_test{
+	display: flex;
+	justify-content: center;
+	background-color: #ebf0f7;
+	min-height: 577px;
+}
+
+.item_test{
+	background-color: #f5f5f5;
+	min-height: 300px;
+	width: 800px;
+	margin: 10px 0px 20px;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px gray;
+}
+
+.inner_item_test{
+	display: flex;
+	height: inherit;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 1.3rem;
+	padding: 15px 30px 20px;
 }
 
 .title_test{
@@ -155,36 +185,13 @@ input[type=radio]:checked + label{
 	margin: 10px 0px; 
 }
 
-#sel{
-	display: block;
-	margin: 20px auto;
-	border-style:none;
-	height: 30px;
-	width: 150px;
-	box-shadow: 2px 2px 2px gray;
-}
-
-#sel::-ms-expand{
+.radio_hidden_test{
 	display: none;
-	border: 0px;
 }
 
-.btn_1{
-	background-color: #ffffff;
-	border: none;
-	width: 85px;
-	border-radius: 8px;
-	box-shadow: 2px 2px 2px gray;
-	font-weight: bold;
-}
-
-.btn_2{
-	background-color: #ffffff;
-	border: none;
-	width: auto;
-	border-radius: 8px;
-	box-shadow: 2px 2px 2px gray;
-	font-weight: bold;
+input[type=radio]:checked + label{
+	font-family:'Pretendard-SemiBold';
+	color: #6ca2ec;
 }
 
 .btn_3_test{
@@ -202,7 +209,280 @@ input[type=radio]:checked + label{
 	margin: 20px;
 }
 
-.btn_1:hover, .btn_2:hover, .btn_3_test:hover{
+.btn_3_test:hover{
+	background-color: #364f6b;
+	color: #ffffff;
+}
+
+/* result 페이지 css */
+.container_result{
+	font-family:'SLEIGothicTTF';
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	background-color: #ebf0f7;
+	min-height: 750px;
+}
+
+.inner_container_result{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+
+.item_result{
+	background-color: #f5f5f5;
+	height: auto;
+	width: 700px;
+	margin: auto;
+	font-size: 20px;
+	padding-bottom: 50px;
+	padding-top: 50px;
+	justify-content: center;
+	align-content: center;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px gray;
+}
+
+th{
+	font-family:'Pretendard-Regular';
+}
+
+.title_result{
+	margin: 0px;
+	text-align: center;
+	padding: 0 20px 10px;
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.btn_2_result{
+	background-color: #ffffff;
+	margin:15px auto;
+	border: none;
+	width: 150px;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px gray;
+	font-weight: bold;
+}
+
+.btn_2_result:hover{
+	background-color: #364f6b;
+	color: #ffffff;
+}
+
+
+/* input css 페이지 */
+.container_input{
+	display: flex;
+	background-color: #ebf0f7;
+	min-height: 900px;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+
+.item_input{
+	background-color: #f5f5f5;
+	height: 700px;
+	width: 800px;
+	margin: 0 auto;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px gray;
+	margin-top: -20px;
+}
+.table_input, .table_input tr, .table_input th, .table_input td {
+	padding: 10px;
+	border: none;
+}
+.table_input td {
+	padding: 10px;
+	border: none;
+	text-align: left;
+	padding-left: 50px;
+}
+.table_input tr:first-child td {
+	padding-left: 200px;
+}
+.table_input tr:last-child td{
+	padding: 10px;
+	border: none;
+	text-align: center;
+}
+.table_input th {
+	border-right: 1px solid gray;
+}
+
+.test_input {
+	font-size: 1.1rem;
+	width: 300px;
+	outline: none;
+	font-family:'sans-serif';
+	background-color: #e9ecef;
+	border: none;
+}
+
+.title_input{
+	display: inline-block;
+	margin: 0px auto;
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+.title_input2{
+	display: inline-block;
+	font-family: 'Pretendard-SemiBold';
+	margin: 30px auto;
+	color: #293c50;
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+.radio_size_input {
+	width: 20px; 
+	height: 20px;
+}
+
+
+.btn_2_input{
+	background-color: #ffffff;
+	border: none;
+	width: auto;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px gray;
+	font-size: 1.5rem;
+	padding: 10px;
+	font-weight: bold;
+}
+
+.btn_2_input:hover, .btn_2_input:hover {
+	background-color: #364f6b;
+	color: #ffffff;
+}
+
+/* update 페이지 css */
+.container_update{
+	justify-content: center;
+	align-content: center;
+	background-color: #ebf0f7;
+	min-height: 700px;
+}
+
+.title_update{
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	height: 100px;
+	padding: 20px 0 10px 0; 
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.subtitle_update{
+	margin: 0px;
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.subtitle_update1{
+	margin: 10px 0 0 20px;
+	padding: 0 20px 10px;
+	text-align: left;
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+
+.textarea_update{
+	padding: 15px;
+	width: 90%; 
+	height:130px;  
+	resize: none;
+	font-size: 1.2rem
+}
+
+
+.container{
+	display: flex;
+	background-color: #ebf0f7;
+	height: 600px;
+}
+
+.item_update{
+	background-color: #f5f5f5;
+	height: 500px;
+	width: 700px;
+	margin: auto;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px gray;
+}
+
+.inner_item_update{
+	display: flex;
+	height: inherit;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+/* modify 페이지 css */
+
+.tempsizing_modify{
+	min-height: 130px;
+}
+.container_modify{
+	background-color: #ebf0f7;
+	min-height: 600px;
+}
+
+.title_modify{
+	margin: 0px;
+	padding: 20px 20px 10px;
+	font-family: 'Pretendard-SemiBold';
+	color: #293c50;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.item_modify{
+	background-color: #f5f5f5;
+	min-height: 200px;
+	width: 800px;
+	margin: 15px auto;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px gray;
+}
+
+.btn_modify{
+	height: 30px;
+	width: 80px;
+	background-color: #ffffff;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px gray;
+	font-weight: bold;
+}
+.btn_modify:hover{
 	background-color: #364f6b;
 	color: #ffffff;
 }

@@ -16,7 +16,7 @@
 		<div class="inner_item">
 			<h1 class="title">시험 선택</h1>
 			<form action="list" method="post">
-				<select id="sel" name="subjectName">
+				<select class="sel" name="subjectName">
 					<option value="bread">빵</option>
 					<option value="snack">과자</option>
 					<option value="icecream">아이스크림</option>
