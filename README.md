@@ -4,7 +4,12 @@
 2021년 8월 31일 ~ 9월 6일까지 진행한 프로젝트입니다.
 첫 프로젝트에서 MVC1 패턴을 이용해 만들었던 OMR 프로그램을
 SPRING과 MyBatis를 사용해 Migration하는 과정을 담았습니다.
+
+✨Notion 정리자료
+https://www.notion.so/Spring-mini-project-A-fd842a5263754143902fd1627e4e0ba8
 ```
+
+
 
 
 ### 🎃팀원 
